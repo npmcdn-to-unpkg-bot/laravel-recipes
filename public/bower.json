@@ -1,0 +1,14 @@
+{
+  "name": "laravel-recipe",
+  "version": "0.0.1",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "^2.2",
+    "bootstrap": "^3.0.0"
+  }
+}
