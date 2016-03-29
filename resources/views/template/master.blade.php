@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <title>Ricette</title>
     <link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('bower_components/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('bower_components/select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}">
     <script src="{{ URL::asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ URL::asset('bower_components/select2/dist/js/select2.min.js') }}"></script>
 
 </head>
 <body>

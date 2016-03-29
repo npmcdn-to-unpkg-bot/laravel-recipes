@@ -21,15 +21,17 @@ class UserController extends Controller
     }
     
     public function add_page(){
-
-        return view("user/recipe_new");
+        $ingredients = Ingredient::all();
+        return view("user/recipe_new", ['ingredients' => $ingredients]);
 
     }
 
     public function modify_page($id){
 
         $recipe = Recipe::find($id);
-        return view("user.recipe_modify", ['recipe' => $recipe]);
+        $ingredients = Ingredient::all();
+
+        return view("user.recipe_modify", ['recipe' => $recipe, 'ingredients' => $ingredients]);
 
     }
 
@@ -42,7 +44,12 @@ class UserController extends Controller
 
         $response = Recipe::create($recipe);
 
-        return $this->modify_page($response->id);
+        $recipeEntity = Recipe::where('id', '=', $response->id )->first();
+
+        $this->updateIgredients($recipe, $recipeEntity);
+
+        // Return to home page
+        return redirect()->route('home');
 
     }
 
@@ -54,16 +61,40 @@ class UserController extends Controller
             'directions'  => Input::get('directions')
         ];
 
-        $response = Recipe::where('id', '=', $recipe['id'] )->update($recipe);
+        $recipeEntity = Recipe::where('id', '=', $recipe['id'] )->first();
 
+        $this->updateIgredients($recipe, $recipeEntity);
+
+        // Return to page
         return $this->modify_page($id);
+
+    }
+
+    public function updateIgredients($recipe, $recipeEntity){
+
+        $newIgredient = Input::get('ingredient');
+
+        $updatedIngredient = collect($newIgredient)->map(function($item){
+
+            if( !ctype_digit ( $item )){
+                $newIngredient = Ingredient::create(['name'=> $item]);
+                return $newIngredient->id;
+            }
+            return $item;
+
+        })->toArray();
+
+        $recipeEntity->ingredient()->sync($updatedIngredient);
+
+        $response = $recipeEntity->update($recipe);
 
     }
 
     public function recipe_delete($id){
 
         $response = Recipe::destroy($id);
-        
+
+        // Return to home page
         return redirect()->route('home');
 
     }
