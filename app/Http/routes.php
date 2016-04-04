@@ -25,6 +25,8 @@
 
 Route::group(['middleware' => ['web']], function () {
 
+    Route::auth();
+
     Route::get("/", ["as" => "home", "uses" => "Roles\GuestController@home"]);
 
     Route::get("ricette/aggiungi", ["as"=>"recipe.add_page", "uses" => "Roles\UserController@add_page"]);

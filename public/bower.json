@@ -9,8 +9,13 @@
   ],
   "dependencies": {
     "jquery": "^2.2",
-    "bootstrap": "^3.0.0",
+    "bootstrap": "^3.0",
     "select2": "^4.0.0",
-    "select2-bootstrap-theme": "^0.1.0"
+    "select2-bootstrap-theme": "^0.1.0",
+    "masonry": "^4.0.0",
+    "imagesloaded": "^4.1.0",
+    "dropzone": "^4.3.0",
+    "font-awesome": "fontawesome#^4.5.0"
+
   }
 }

@@ -6,3 +6,5 @@
 
     - Clone this repository
     - Launch a 'composer update' on command line from project root
+    - Do a 'bower update' from /public
+    - Compile sass once with 'gulp'

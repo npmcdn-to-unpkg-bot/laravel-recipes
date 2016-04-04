@@ -35,16 +35,26 @@ class UserController extends Controller
 
     }
 
-    public function recipe_create(){
+    public function recipe_create(Request $request){
 
         $recipe = [
             'title'  => Input::get('title'),
             'directions'  => Input::get('directions')
         ];
 
-        $response = Recipe::create($recipe);
+        if( $request->file('image') )
+        {
+            $image = $request->file('image');
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
 
-        $recipeEntity = Recipe::where('id', '=', $response->id )->first();
+            $path = public_path('img/');
+
+            $request->file('image')->move($path, $filename);
+
+            $recipe['image'] = "img/".$filename;
+        }
+
+        $recipeEntity = Recipe::create($recipe);
 
         $this->updateIgredients($recipe, $recipeEntity);
 
@@ -53,13 +63,27 @@ class UserController extends Controller
 
     }
 
-    public function recipe_update($id){
+    public function recipe_update($id, Request $request){
 
         $recipe = [
             'id'  => $id,
             'title'  => Input::get('title'),
             'directions'  => Input::get('directions')
         ];
+
+        if( $request->file('image') )
+        {
+
+            $image = $request->file('image');
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+
+            $path = public_path('img/');
+
+            $request->file('image')->move($path, $filename);
+
+            $recipe['image'] = "img/".$filename;
+        }
+
 
         $recipeEntity = Recipe::where('id', '=', $recipe['id'] )->first();
 
@@ -69,6 +93,8 @@ class UserController extends Controller
         return $this->modify_page($id);
 
     }
+
+
 
     public function updateIgredients($recipe, $recipeEntity){
 
