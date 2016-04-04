@@ -65,7 +65,7 @@ Servite le polpette al sugo, cospargendo ancora con del prezzemolo tritato",
                 "image" => "pollofritto"
             ],
             [
-                "title" => "gricia",
+                "title" => "Gricia",
                 "directions" => "Cerca su google",
                 "image" => "gricia"
             ],
